@@ -1,6 +1,7 @@
 # Ignore raw data
 data/
 *.edf
+*.npz
 
 # Ignore Python cache
 __pycache__/
