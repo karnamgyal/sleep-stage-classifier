@@ -83,3 +83,43 @@ def preprocess_data(data_dir, epoch_duration=30, sfreq=100):
     y = np.hstack(y_list)
 
     return X, y
+
+# Function create the data loaders
+def create_data_loaders(X, y, batch_size=64):
+    """
+    Create DataLoader objects for training and validation datasets.
+    
+    Args:
+        X (np.ndarray): Input data (epochs).
+        y (np.ndarray): Labels corresponding to the epochs.
+        batch_size (int): Size of each batch.
+        
+    Returns:
+        DataLoader: DataLoader object for the dataset.
+    """
+    from torch.utils.data import TensorDataset, DataLoader, random_split
+    import torch
+
+    X, y = preprocess_data(data_dir)
+    
+    # Convert to PyTorch tensors
+    X_tensor = torch.tensor(X, dtype=torch.float32)
+    y_tensor = torch.tensor(y, dtype=torch.long)
+    dataset = TensorDataset(X_tensor, y_tensor)
+
+    # Declare lengths of sets
+    train_size = int(0.6 * len(dataset))  
+    val_size = int(0.15 * len(dataset))   
+    test_size = int(0.15 * len(dataset))  
+    user_size = len(dataset) - train_size - val_size - test_size 
+
+    # Split the data
+    train_dataset, val_dataset, test_dataset, user_dataset = random_split(dataset, [train_size, val_size, test_size, user_size])
+    
+    # Create DataLoaders
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+    user_loader = DataLoader(user_dataset, batch_size=batch_size, shuffle=False)
+
+    return train_loader, val_loader, test_loader, user_loader
