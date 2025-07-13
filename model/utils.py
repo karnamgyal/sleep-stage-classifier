@@ -16,6 +16,11 @@ Date edited: 2025-06-24
 import os
 import mne
 import numpy as np
+import mne
+import warnings
+
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+mne.set_log_level("WARNING")
 
 # labeling each sleep stage to a class
 LABEL_MAP = {
@@ -34,53 +39,77 @@ def preprocess_data(data_dir, epoch_duration=30, sfreq=100):
     X_list = []
     y_list = []
 
-    # Finding the a valid data pair.
+    # Finding valid data pairs
     for file in os.listdir(data_dir):
         if not file.endswith("PSG.edf"):
             continue  
 
         psg_path = os.path.join(data_dir, file)
-        hypnogram_path = psg_path.replace("E0-PSG.edf", "EC-Hypnogram.edf")
 
-        if not os.path.exists(hypnogram_path):
+        # Get base ID like 'SC4001'
+        base_id = file[:6]
+
+        # Find any hypnogram file that starts with same base ID
+        hypnogram_candidates = [f for f in os.listdir(data_dir)
+                                if f.startswith(base_id) and "Hypnogram" in f]
+
+        if not hypnogram_candidates:
             print(f" Skipping {file}: (missing hypnogram)")
             continue
 
-    # Load EEG and annotations
-    raw = mne.io.read_raw_edf("data/SC4001E0-PSG.edf", preload=True)
-    annotations = mne.read_annotations("data/SC4001EC-Hypnogram.edf")
-    raw.set_annotations(annotations)
+        hypnogram_path = os.path.join(data_dir, hypnogram_candidates[0])
 
-    # Pick EEG channel and filter
-    raw.pick_channels(['EEG Fpz-Cz', 'EEG Pz-Oz'])
-    raw.filter(0.5, 30)
+        # Load EEG and annotations
+        raw = mne.io.read_raw_edf(psg_path, preload=True)
+        annotations = mne.read_annotations(hypnogram_path)
+        raw.set_annotations(annotations)
 
-    # Turn the annotations into events
-    events, _ = mne.events_from_annotations(raw, event_id=None)
+        # Pick EEG channels and filter
+        raw.pick_channels(['EEG Fpz-Cz', 'EEG Pz-Oz'])
+        raw.filter(0.5, 30)
 
-    # Put epoch into 30s windows
-    epochs = mne.Epochs(raw, events=events, event_id=None, tmin = 0, tmax=epoch_duration, baseline=None, preload=True, verbose=False)
+        # Extract matching events from annotations
+        available_event_ids = {
+            k: v for k, v in LABEL_MAP.items()
+            if k in [ann['description'] for ann in annotations]
+        }
+        events, _ = mne.events_from_annotations(raw, event_id=available_event_ids, verbose=False)
 
-    # Turn into a numpy array
-    X = epochs.get_data()
+        # Skip if no valid events
+        if events.shape[0] == 0:
+            print(f" Skipping {file}: (no valid events)")
+            continue
 
-    # loop through annotations and convert to label
-    stage_labels = [LABEL_MAP.get(ann['description'], -1) for ann in annotations]
+        # Split into 30-second epochs
+        epochs = mne.Epochs(
+            raw, events=events, event_id=available_event_ids,
+            tmin=0, tmax=epoch_duration, baseline=None,
+            preload=True, verbose=False
+        )
 
-    # Align labels to epoch count (filter invalid ones)
-    valid_idx = [i for i, stage in enumerate(stage_labels) if stage != -1]
-    
-    # Obtaining input data and labels
-    X = X[:len(valid_idx)]
-    y = [stage_labels[i] for i in valid_idx]
+        # Turn into a numpy array
+        X = epochs.get_data()
 
-    # Appending X and y data to lists
-    X_list.append(X)
-    y_list.append(y)   
+        # Convert annotation labels
+        stage_labels = [LABEL_MAP.get(ann['description'], -1) for ann in annotations]
+        valid_idx = [i for i, stage in enumerate(stage_labels) if stage != -1]
+
+        # Truncate to the minimum length
+        min_len = min(len(X), len(valid_idx))
+        X = X[:min_len]
+        y = [stage_labels[i] for i in valid_idx[:min_len]]
+
+        # Append to data lists
+        X_list.append(X)
+        y_list.append(y)
 
     # Stack all subjects
     X = np.vstack(X_list)
     y = np.hstack(y_list)
+
+    # Save preprocessed data 
+    np.save("data/X.npy", X)
+    np.save("data/y.npy", y)
 
     return X, y
 
@@ -99,8 +128,6 @@ def create_data_loaders(X, y, batch_size=64):
     """
     from torch.utils.data import TensorDataset, DataLoader, random_split
     import torch
-
-    X, y = preprocess_data(data_dir)
     
     # Convert to PyTorch tensors
     X_tensor = torch.tensor(X, dtype=torch.float32)
@@ -108,7 +135,7 @@ def create_data_loaders(X, y, batch_size=64):
     dataset = TensorDataset(X_tensor, y_tensor)
 
     # Declare lengths of sets
-    train_size = int(0.6 * len(dataset))  
+    train_size = int(0.7 * len(dataset))  
     val_size = int(0.15 * len(dataset))   
     test_size = int(0.15 * len(dataset))  
     user_size = len(dataset) - train_size - val_size - test_size 

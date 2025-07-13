@@ -21,17 +21,20 @@ class EEG_Model(nn.Module):
     def __init__(self):
         super(EEG_Model, self).__init__()
         self.conv1 = nn.Conv1d(2, 32, 5, 2)
-        self.maxpool1 = nn.MaxPool1d(2, 2)
+        self.bn1 = nn.BatchNorm1d(32)
+        self.pool1 = nn.MaxPool1d(2)
         self.conv2 = nn.Conv1d(32, 64, 3, 1)
-        self.maxpool2 = nn.MaxPool1d(2, 2)
-        self.fc1 = nn.Linear(64 * 373, 256) # Calculated based on input size
-        self.fc2 = nn.Linear(256, 5)
+        self.bn2 = nn.BatchNorm1d(64)
+        self.pool2 = nn.MaxPool1d(2)
+        self.fc1 = nn.Linear(64 * 373, 128)
+        self.dropout = nn.Dropout(0.5)
+        self.fc2 = nn.Linear(128, 5)
+
     def forward(self, x):
-        x = F.relu(self.conv1(x))
-        x = self.maxpool1(x)
-        x = F.relu(self.conv2(x))
-        x = self.maxpool2(x)
+        x = self.pool1(F.relu(self.bn1(self.conv1(x))))
+        x = self.pool2(F.relu(self.bn2(self.conv2(x))))
         x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
+        x = self.dropout(x)
         x = self.fc2(x)
         return x

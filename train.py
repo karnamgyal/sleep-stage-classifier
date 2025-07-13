@@ -13,24 +13,29 @@ This script:
 Author: Karma Namgyal
 Date: 2006-09-27
 """
-
+import os
 import torch 
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 from torch.utils.data import DataLoader
+from model.model import EEG_Model
+from model.utils import preprocess_data, create_data_loaders
 from helper import evaluate, plot_curve, get_model_name
 
+def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.0001, num_epochs=30, plot_path=None):
 
-def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=30, plot_path=None):
+    # Make sure the directory exists
+    os.makedirs(os.path.dirname(plot_path), exist_ok=True)
 
     # Set device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
+    print("Using device:", torch.cuda.get_device_name(torch.cuda.current_device()) if torch.cuda.is_available() else "CPU")
 
     # Loss function and optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-4)
 
     # Arrays to track metrics
     train_err = np.zeros(num_epochs)
@@ -79,4 +84,29 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
         np.savetxt(f"{plot_path}_val_err.csv", val_err)
         np.savetxt(f"{plot_path}_val_loss.csv", val_loss)
 
+    test_err, test_loss = evaluate(model, test_loader, criterion, device)
+    print(f"\nTest Loss: {test_loss:.4f}, Test Accuracy: {1-test_err:.4f}")
+
     return train_loss, train_err, val_loss, val_err
+
+# Preprocess data
+if os.path.exists("data/X.npy") and os.path.exists("data/y.npy"):
+    X = np.load("data/X.npy")
+    y = np.load("data/y.npy")
+else:
+    X, y = preprocess_data("C:/Users/namgy/Downloads/sleep-edf-database-expanded-1.0.0/sleep-edf-database-expanded-1.0.0/sleep-cassette")
+    np.save("data/X.npy", X)
+    np.save("data/y.npy", y)
+
+# Create DataLoaders
+train_loader, val_loader, test_loader, user_loader = create_data_loaders(X, y)
+
+# Initialize model
+model = EEG_Model()
+
+# Train the model
+train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, plot_path="plots/training_metrics")
+
+# Plot training curves
+plot_curve("plots/training_metrics")
+
