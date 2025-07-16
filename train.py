@@ -21,9 +21,9 @@ import numpy as np
 from torch.utils.data import DataLoader
 from model.model import EEG_Model
 from model.utils import preprocess_data, create_data_loaders
-from helper import evaluate, plot_curve, get_model_name
+from helper import evaluate, plot_curve, get_model_name, log_run
 
-def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.0001, num_epochs=30, plot_path=None):
+def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=30, plot_path=None):
 
     # Make sure the directory exists
     os.makedirs(os.path.dirname(plot_path), exist_ok=True)
@@ -77,7 +77,7 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
               f"Train Loss: {train_loss[epoch]:.4f}, Train Acc: {1-train_err[epoch]:.4f} | "
               f"Val Loss: {val_loss[epoch]:.4f}, Val Acc: {1-val_err[epoch]:.4f}")
 
-    # Save metrics after training
+    # Plot metrics after training
     if plot_path:
         np.savetxt(f"{plot_path}_train_err.csv", train_err)
         np.savetxt(f"{plot_path}_train_loss.csv", train_loss)
@@ -86,6 +86,23 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
 
     test_err, test_loss = evaluate(model, test_loader, criterion, device)
     print(f"\nTest Loss: {test_loss:.4f}, Test Accuracy: {1-test_err:.4f}")
+
+    # Log the run
+    params = {
+    "Model": "EEG_Model",
+    "Epochs": num_epochs,
+    "Batch Size": batch_size,
+    "Learning Rate": learning_rate,
+}
+
+    metrics = {
+    "Final Train Accuracy": round(1 - train_err[-1], 4),
+    "Final Val Accuracy": round(1 - val_err[-1], 4),
+    "Final Train Loss": round(train_loss[-1], 4),
+    "Final Val Loss": round(val_loss[-1], 4)
+}
+
+    log_run("results_log.txt", params, metrics)
 
     return train_loss, train_err, val_loss, val_err
 
@@ -105,7 +122,7 @@ train_loader, val_loader, test_loader, user_loader = create_data_loaders(X, y)
 model = EEG_Model()
 
 # Train the model
-train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, plot_path="plots/training_metrics")
+train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=30, plot_path="plots/training_metrics")
 
 # Plot training curves
 plot_curve("plots/training_metrics")

@@ -10,3 +10,6 @@ __pycache__/
 # Ignore virtual environments
 venv311/
 .env/
+
+# Ignore plots
+plots/

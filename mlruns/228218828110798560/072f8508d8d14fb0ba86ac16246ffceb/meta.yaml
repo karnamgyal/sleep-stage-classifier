@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/namgy/OneDrive/Desktop/sleep-stage-visualizer/mlruns/228218828110798560/072f8508d8d14fb0ba86ac16246ffceb/artifacts
+end_time: 1752637170753
+entry_point_name: ''
+experiment_id: '228218828110798560'
+lifecycle_stage: active
+run_id: 072f8508d8d14fb0ba86ac16246ffceb
+run_name: receptive-whale-352
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1752637131253
+status: 3
+tags: []
+user_id: namgy

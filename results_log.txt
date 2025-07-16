@@ -1,0 +1,20 @@
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 30
+Batch Size: 64
+Learning Rate: 0.0001
+Final Train Accuracy: 0.878
+Final Val Accuracy: 0.6273
+Final Train Loss: 0.3196
+Final Val Loss: 1.1001
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 30
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.5156
+Final Val Accuracy: 0.5137
+Final Train Loss: 1.1594
+Final Val Loss: 1.1335
+

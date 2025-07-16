@@ -1,0 +1,23 @@
+artifact_path: file:///C:/Users/namgy/OneDrive/Desktop/sleep-stage-visualizer/mlruns/228218828110798560/models/m-fcbd413ef8f94e56a0f299c3d4c32a17/artifacts
+flavors:
+  python_function:
+    config:
+      device: null
+    data: data
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.pytorch
+    pickle_module_name: mlflow.pytorch.pickle_module
+    python_version: 3.11.0
+  pytorch:
+    code: null
+    model_data: data
+    pytorch_version: 2.5.1+cu121
+mlflow_version: 3.1.1
+model_id: m-fcbd413ef8f94e56a0f299c3d4c32a17
+model_size_bytes: 12261392
+model_uuid: m-fcbd413ef8f94e56a0f299c3d4c32a17
+prompts: null
+run_id: 072f8508d8d14fb0ba86ac16246ffceb
+utc_time_created: '2025-07-16 03:39:29.348628'

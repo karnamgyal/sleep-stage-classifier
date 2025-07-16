@@ -1,0 +1,14 @@
+channels:
+- defaults
+- conda-forge
+- pytorch
+dependencies:
+- python=3.8
+- pytorch
+- torchvision
+- numpy
+- matplotlib
+- pip:
+  - mlflow
+  - mne
+name: eeg_env

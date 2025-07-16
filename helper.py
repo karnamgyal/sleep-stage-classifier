@@ -98,3 +98,12 @@ def get_model_name(name, batch_size, learning_rate, epoch):
                                                    learning_rate,
                                                    epoch)
     return path
+
+def log_run(file_path, params, metrics):
+    with open(file_path, "a") as f:
+        f.write("=== New Model Run ===\n")
+        for key, value in params.items():
+            f.write(f"{key}: {value}\n")
+        for key, value in metrics.items():
+            f.write(f"{key}: {value}\n")
+        f.write("\n")
