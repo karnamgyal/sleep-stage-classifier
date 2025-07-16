@@ -13,3 +13,6 @@ venv311/
 
 # Ignore plots
 plots/
+
+# Ignore model checkpoints
+mlruns/
