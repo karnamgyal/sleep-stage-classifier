@@ -26,13 +26,19 @@ class EEG_Model(nn.Module):
         self.conv2 = nn.Conv1d(32, 64, 3, 1)
         self.bn2 = nn.BatchNorm1d(64)
         self.pool2 = nn.MaxPool1d(2)
-        self.fc1 = nn.Linear(64 * 373, 128)
+        self.lstm1 = nn.LSTM(64, 64, batch_first=True)
+        self.lstm2 = nn.LSTM(64, 32, batch_first=True)
+        self.fc1 = nn.Linear(32, 128) 
         self.dropout = nn.Dropout(0.5)
-        self.fc2 = nn.Linear(128, 5)
+        self.fc2 = nn.Linear(128, 5)  
 
     def forward(self, x):
         x = self.pool1(F.relu(self.bn1(self.conv1(x))))
         x = self.pool2(F.relu(self.bn2(self.conv2(x))))
+        x = x.transpose(1, 2)
+        x, _ = self.lstm1(x)
+        x, _ = self.lstm2(x)
+        x = x[:, -1, :]
         x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)

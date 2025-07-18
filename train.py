@@ -122,7 +122,7 @@ train_loader, val_loader, test_loader, user_loader = create_data_loaders(X, y)
 model = EEG_Model()
 
 # Train the model
-train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=30, plot_path="plots/training_metrics")
+train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=70, plot_path="plots/training_metrics")
 
 # Plot training curves
 plot_curve("plots/training_metrics")
