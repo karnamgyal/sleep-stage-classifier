@@ -35,7 +35,7 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
 
     # Loss function and optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-4)
+    optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
 
     # Arrays to track metrics
     train_err = np.zeros(num_epochs)
@@ -70,7 +70,7 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
         train_err[epoch] = 1 - (correct_train / total_train)
 
         # Evaluate on validation set
-        val_err[epoch], val_loss[epoch] = evaluate(model, val_loader, criterion, device)
+        val_err[epoch], val_loss[epoch], _, _, _ = evaluate(model, val_loader, criterion, device)
 
         # Print metrics
         print(f"Epoch {epoch+1}/{num_epochs}: "
@@ -84,8 +84,18 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
         np.savetxt(f"{plot_path}_val_err.csv", val_err)
         np.savetxt(f"{plot_path}_val_loss.csv", val_loss)
 
-    test_err, test_loss = evaluate(model, test_loader, criterion, device)
-    print(f"\nTest Loss: {test_loss:.4f}, Test Accuracy: {1-test_err:.4f}")
+    # Full evaluation on test set with metrics
+    test_err, test_loss, test_f1, test_report, test_conf = evaluate(model, test_loader, criterion, device)
+
+    print(f"\nTest Loss: {test_loss:.4f}, Test Accuracy: {1 - test_err:.4f}, Test F1 (macro): {test_f1:.4f}")
+
+    print("\nPer-class F1 Scores (on test set):")
+    for cls_id in range(5): 
+     f1 = test_report[str(cls_id)]['f1-score']
+     print(f"  Class {cls_id}: F1 = {f1:.4f}")
+
+    print("\nConfusion Matrix (on test set):")
+    print(test_conf)
 
     # Log the run
     params = {
@@ -122,7 +132,7 @@ train_loader, val_loader, test_loader, user_loader = create_data_loaders(X, y)
 model = EEG_Model()
 
 # Train the model
-train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=70, plot_path="plots/training_metrics")
+train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=50, plot_path="plots/training_metrics")
 
 # Plot training curves
 plot_curve("plots/training_metrics")

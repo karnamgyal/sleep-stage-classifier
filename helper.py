@@ -15,36 +15,39 @@ Date: 2025-07-04
 import torch 
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.metrics import f1_score, confusion_matrix, classification_report
 
-def evaluate(model, loader, criterion, device):
-    """
-     Args:
-         net: PyTorch neural network object
-         loader: PyTorch data loader for the validation set
-         criterion: The loss function
-     Returns:
-         err: A scalar for the avg classification error over the validation set
-         loss: A scalar for the average loss function over the validation set
-     """
+def evaluate(model, dataloader, criterion, device):
     model.eval()
-    total_loss = 0.0
-    correct = 0
-    total = 0
+    total_loss = 0
+    total_correct = 0
+    total_samples = 0
+
+    all_preds = []
+    all_labels = []
 
     with torch.no_grad():
-        for images, labels in loader:
-            images, labels = images.to(device), labels.to(device)
-            outputs = model(images)
+        for eeg_data, labels in dataloader:
+            eeg_data, labels = eeg_data.to(device), labels.to(device)
+            outputs = model(eeg_data)
             loss = criterion(outputs, labels)
-
-            _, predicted = torch.max(outputs, 1)
-            total += labels.size(0)
-            correct += (predicted == labels).sum().item()
             total_loss += loss.item()
 
-    avg_loss = total_loss / len(loader)
-    error = 1 - (correct / total)
-    return error, avg_loss
+            _, predicted = torch.max(outputs, 1)
+            total_correct += (predicted == labels).sum().item()
+            total_samples += labels.size(0)
+
+            all_preds.extend(predicted.cpu().numpy())
+            all_labels.extend(labels.cpu().numpy())
+
+    error = 1 - (total_correct / total_samples)
+    avg_loss = total_loss / len(dataloader)
+
+    f1_macro = f1_score(all_labels, all_preds, average='macro')
+    class_report = classification_report(all_labels, all_preds, digits=4, output_dict=True, zero_division=0)
+    conf_mat = confusion_matrix(all_labels, all_preds)
+
+    return error, avg_loss, f1_macro, class_report, conf_mat
 
 def plot_curve(path):
     """ 
