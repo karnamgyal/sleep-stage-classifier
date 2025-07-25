@@ -4,7 +4,7 @@ helper.py
 Helper functions for model evaluation, model saving and plotting curves.
 
 Includes:
-- evaluate(): Computes classification error and average loss on a validation/test set.
+- evaluate(): Computes classification error and average loss on val/test set.
 - plot_curve(): Plots training accuracy and loss over epochs from saved CSV files.
 - get_model_name(): Generate a unique name for models based on hyperparameters.
 

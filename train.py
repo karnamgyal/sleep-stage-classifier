@@ -3,10 +3,9 @@ train.py
 
 Main training script for sleep stage classification using EEG data.
 
-This script:
-- Loads and preprocesses EEG and hypnogram data from Sleep-EDF
-- Splits the data into training, validation, and test sets
-- Wraps the data into PyTorch DataLoaders
+- Load and preprocesses EEG and hypnogram data from Sleep-EDF
+- Split data into training, validation, and test sets
+- Create data loaders for each set
 - Trains a CNN-LSTM model to classify sleep stages
 - Evaluates performance on the validation and test sets
 
@@ -22,6 +21,17 @@ from torch.utils.data import DataLoader
 from model.model import EEG_Model
 from model.utils import preprocess_data, create_data_loaders
 from helper import evaluate, plot_curve, get_model_name, log_run
+import random
+
+# Set a seed to reproduce results
+def set_seed(seed=42):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+set_seed(42)
 
 def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=30, plot_path=None):
 
@@ -32,24 +42,9 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
     print("Using device:", torch.cuda.get_device_name(torch.cuda.current_device()) if torch.cuda.is_available() else "CPU")
-    
-    # ADD CLASS WEIGHTS HERE - BEFORE CREATING CRITERION
-    # Calculate class weights from the training data
-    all_labels = []
-    for _, labels in train_loader:
-        all_labels.extend(labels.numpy())
-    
-    unique, counts = np.unique(all_labels, return_counts=True)
-    class_weights = len(all_labels) / (len(unique) * counts)
-    class_weights = torch.FloatTensor(class_weights).to(device)
-    
-    print("Class distribution:")
-    for class_id, count in zip(unique, counts):
-        print(f"Class {class_id}: {count} samples ({count/len(all_labels)*100:.1f}%)")
-    print(f"Class weights: {class_weights}")
 
-    # Loss function and optimizer - USE THE WEIGHTED LOSS
-    criterion = nn.CrossEntropyLoss(weight=class_weights)  # ADD weight=class_weights
+    # Loss function and optimizer 
+    criterion = nn.CrossEntropyLoss()  
     optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
     
     # Arrays to track metrics
@@ -58,6 +53,7 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
     val_err = np.zeros(num_epochs)
     val_loss = np.zeros(num_epochs)
 
+    # Training loops
     for epoch in range(num_epochs):
         model.train()
         correct_train = 0
@@ -99,16 +95,15 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
         np.savetxt(f"{plot_path}_val_err.csv", val_err)
         np.savetxt(f"{plot_path}_val_loss.csv", val_loss)
 
-    # Full evaluation on test set with metrics
+    # Evaluation on test set with metrics
     test_err, test_loss, test_f1, test_report, test_conf = evaluate(model, test_loader, criterion, device)
 
+    # Print final test metrics
     print(f"\nTest Loss: {test_loss:.4f}, Test Accuracy: {1 - test_err:.4f}, Test F1 (macro): {test_f1:.4f}")
-
     print("\nPer-class F1 Scores (on test set):")
     for cls_id in range(5): 
      f1 = test_report[str(cls_id)]['f1-score']
      print(f"  Class {cls_id}: F1 = {f1:.4f}")
-
     print("\nConfusion Matrix (on test set):")
     print(test_conf)
 
@@ -147,7 +142,7 @@ train_loader, val_loader, test_loader, user_loader = create_data_loaders(X, y)
 model = EEG_Model()
 
 # Train the model
-train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=32, learning_rate=0.0001, num_epochs=75, plot_path="plots/training_metrics")
+train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=32, learning_rate=0.0001, num_epochs=60, plot_path="plots/training_metrics")
 
 # Plot training curves
 plot_curve("plots/training_metrics")

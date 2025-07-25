@@ -164,7 +164,7 @@ def create_data_loaders(X, y, batch_size=64):
 
     # Split the dataset
     train_dataset, val_dataset, test_dataset, user_dataset = random_split(
-        dataset, [train_size, val_size, test_size, user_size], generator
+        dataset, [train_size, val_size, test_size, user_size], generator=generator
     )
     
     # Create DataLoaders

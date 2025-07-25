@@ -912,3 +912,33 @@ Final Train Loss: 0.6336
 Final Val Loss: 0.7247
 Test F1 (macro): 0.6887
 
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7164
+Final Val Accuracy: 0.6885
+Final Train Loss: 0.6338
+Final Val Loss: 0.7289
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7371
+Final Val Accuracy: 0.7102
+Final Train Loss: 0.6503
+Final Val Loss: 0.7096
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7348
+Final Val Accuracy: 0.6957
+Final Train Loss: 0.6581
+Final Val Loss: 0.739
+

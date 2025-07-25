@@ -3,6 +3,12 @@ data/
 *.edf
 *.npz
 
+data2/
+*X.npy
+*y.npy
+*.edf
+*.npz
+
 # Ignore Python cache
 __pycache__/
 *.pyc
@@ -13,6 +19,10 @@ venv311/
 
 # Ignore plots
 plots/
+*training_metrics_train_err.csv
+*training_metrics_val_err.csv
+*training_metrics_train_loss.csv
+*training_metrics_val_loss.csv
 
 # Ignore model checkpoints
 mlruns/
@@ -21,7 +31,7 @@ mlruns/
 .ipynb_checkpoints/
 
 # Ignore logs
-logs/
+*results_log.txt
 
 # Ignore jupyter notebook files
 *.ipynb

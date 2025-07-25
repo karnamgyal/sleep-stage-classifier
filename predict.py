@@ -8,6 +8,7 @@ import warnings
 from torch.utils.data import TensorDataset, DataLoader
 warnings.filterwarnings("ignore")
 
+# Set device 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load model
@@ -15,7 +16,7 @@ model = EEG_Model().to(device)
 model.load_state_dict(torch.load("model_weights.pth", map_location=device))
 model.eval()
 
-# Preprocess data
+# Preprocess data (four unseen subjects)
 if os.path.exists("data2/X.npy") and os.path.exists("data2/y.npy"):
     X_unseen = np.load("data2/X.npy")
     y_unseen = np.load("data2/y.npy")
@@ -24,12 +25,11 @@ else:
     np.save("data2/X.npy", X_unseen)
     np.save("data2/y.npy", y_unseen)
 
-# Create test loader
+# Create test loader with unseen subjects
 X_tensor = torch.tensor(X_unseen).float()
 y_tensor = torch.tensor(y_unseen).long()
 test_dataset = TensorDataset(X_tensor, y_tensor)
 test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
-
 print("Number of test samples:", len(test_loader.dataset))
 
 # Evaluate
