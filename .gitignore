@@ -16,3 +16,12 @@ plots/
 
 # Ignore model checkpoints
 mlruns/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore logs
+logs/
+
+# Ignore jupyter notebook files
+*.ipynb

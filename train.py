@@ -32,11 +32,26 @@ def train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.00
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(device)
     print("Using device:", torch.cuda.get_device_name(torch.cuda.current_device()) if torch.cuda.is_available() else "CPU")
+    
+    # ADD CLASS WEIGHTS HERE - BEFORE CREATING CRITERION
+    # Calculate class weights from the training data
+    all_labels = []
+    for _, labels in train_loader:
+        all_labels.extend(labels.numpy())
+    
+    unique, counts = np.unique(all_labels, return_counts=True)
+    class_weights = len(all_labels) / (len(unique) * counts)
+    class_weights = torch.FloatTensor(class_weights).to(device)
+    
+    print("Class distribution:")
+    for class_id, count in zip(unique, counts):
+        print(f"Class {class_id}: {count} samples ({count/len(all_labels)*100:.1f}%)")
+    print(f"Class weights: {class_weights}")
 
-    # Loss function and optimizer
-    criterion = nn.CrossEntropyLoss()
+    # Loss function and optimizer - USE THE WEIGHTED LOSS
+    criterion = nn.CrossEntropyLoss(weight=class_weights)  # ADD weight=class_weights
     optimizer = optim.Adam(model.parameters(), lr=learning_rate, weight_decay=1e-5)
-
+    
     # Arrays to track metrics
     train_err = np.zeros(num_epochs)
     train_loss = np.zeros(num_epochs)
@@ -132,8 +147,7 @@ train_loader, val_loader, test_loader, user_loader = create_data_loaders(X, y)
 model = EEG_Model()
 
 # Train the model
-train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=64, learning_rate=0.001, num_epochs=50, plot_path="plots/training_metrics")
+train_loss, train_err, val_loss, val_err = train_CNN(model, train_loader, val_loader, batch_size=32, learning_rate=0.0001, num_epochs=75, plot_path="plots/training_metrics")
 
 # Plot training curves
 plot_curve("plots/training_metrics")
-

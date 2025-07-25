@@ -340,3 +340,575 @@ Final Val Accuracy: 0.6861
 Final Train Loss: 0.6746
 Final Val Loss: 0.7821
 
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.7024
+Final Val Accuracy: 0.1687
+Final Train Loss: 0.7074
+Final Val Loss: 2.9214
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.7045
+Final Val Accuracy: 0.2926
+Final Train Loss: 0.7127
+Final Val Loss: 2.4306
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.6986
+Final Val Accuracy: 0.1678
+Final Train Loss: 0.7192
+Final Val Loss: 4.6682
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.838
+Final Val Accuracy: 0.1699
+Final Train Loss: 0.411
+Final Val Loss: 2.1087
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.8735
+Final Val Accuracy: 0.1579
+Final Train Loss: 0.3259
+Final Val Loss: 4.4568
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.7067
+Final Val Accuracy: 0.1546
+Final Train Loss: 0.7027
+Final Val Loss: 1.8355
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.7091
+Final Val Accuracy: 0.1675
+Final Train Loss: 0.7057
+Final Val Loss: 3.902
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 32
+Learning Rate: 0.01
+Final Train Accuracy: 0.6285
+Final Val Accuracy: 0.2679
+Final Train Loss: 0.8779
+Final Val Loss: 2.4828
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 32
+Learning Rate: 0.01
+Final Train Accuracy: 0.2889
+Final Val Accuracy: 0.2787
+Final Train Loss: 1.5214
+Final Val Loss: 1.5347
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 32
+Learning Rate: 0.01
+Final Train Accuracy: 0.2844
+Final Val Accuracy: 0.2889
+Final Train Loss: 1.5244
+Final Val Loss: 1.5211
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 32
+Learning Rate: 0.01
+Final Train Accuracy: 0.6419
+Final Val Accuracy: 0.2657
+Final Train Loss: 0.8638
+Final Val Loss: 2.0807
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.8286
+Final Val Accuracy: 0.1636
+Final Train Loss: 0.4282
+Final Val Loss: 5.5326
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.8286
+Final Val Accuracy: 0.1636
+Final Train Loss: 0.4282
+Final Val Loss: 5.5326
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.677
+Final Val Accuracy: 0.2926
+Final Train Loss: 0.7594
+Final Val Loss: 2.0024
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.6728
+Final Val Accuracy: 0.2669
+Final Train Loss: 0.7792
+Final Val Loss: 4.4096
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.8244
+Final Val Accuracy: 0.1573
+Final Train Loss: 0.4372
+Final Val Loss: 8.5288
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.8244
+Final Val Accuracy: 0.1573
+Final Train Loss: 0.4372
+Final Val Loss: 8.5288
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 50
+Batch Size: 64
+Learning Rate: 0.001
+Final Train Accuracy: 0.8655
+Final Val Accuracy: 0.6749
+Final Test Accuracy: 0.6939
+Final Train Loss: 0.3495
+Final Val Loss: 0.9775
+Test F1 (macro): 0.6884
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.8039
+Final Val Accuracy: 0.7147
+Final Test Accuracy: 0.7198
+Final Train Loss: 0.5063
+Final Val Loss: 0.7425
+Test F1 (macro): 0.7067
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.8084
+Final Val Accuracy: 0.7008
+Final Test Accuracy: 0.7065
+Final Train Loss: 0.5017
+Final Val Loss: 0.7755
+Test F1 (macro): 0.6899
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7692
+Final Val Accuracy: 0.7213
+Final Test Accuracy: 0.724
+Final Train Loss: 0.5767
+Final Val Loss: 0.7085
+Test F1 (macro): 0.7161
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7093
+Final Val Accuracy: 0.7135
+Final Train Loss: 0.6414
+Final Val Loss: 0.7444
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7852
+Final Val Accuracy: 0.6984
+Final Test Accuracy: 0.7165
+Final Train Loss: 0.5421
+Final Val Loss: 0.747
+Test F1 (macro): 0.7085
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7927
+Final Val Accuracy: 0.7059
+Final Test Accuracy: 0.6903
+Final Train Loss: 0.5217
+Final Val Loss: 0.7431
+Test F1 (macro): 0.6713
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7564
+Final Val Accuracy: 0.7056
+Final Test Accuracy: 0.7201
+Final Train Loss: 0.6034
+Final Val Loss: 0.7128
+Test F1 (macro): 0.7047
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7162
+Final Val Accuracy: 0.6951
+Final Train Loss: 0.6437
+Final Val Loss: 0.7335
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7656
+Final Val Accuracy: 0.7005
+Final Test Accuracy: 0.7065
+Final Train Loss: 0.5791
+Final Val Loss: 0.7131
+Test F1 (macro): 0.6865
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7409
+Final Val Accuracy: 0.6993
+Final Test Accuracy: 0.721
+Final Train Loss: 0.6316
+Final Val Loss: 0.7125
+Test F1 (macro): 0.6921
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 75
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.6938
+Final Val Accuracy: 0.6987
+Final Train Loss: 0.6822
+Final Val Loss: 0.6836
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7419
+Final Val Accuracy: 0.7207
+Final Test Accuracy: 0.699
+Final Train Loss: 0.6307
+Final Val Loss: 0.7041
+Test F1 (macro): 0.6787
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7475
+Final Val Accuracy: 0.7249
+Final Test Accuracy: 0.7008
+Final Train Loss: 0.6262
+Final Val Loss: 0.7149
+Test F1 (macro): 0.6593
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7312
+Final Val Accuracy: 0.7032
+Final Test Accuracy: 0.6921
+Final Train Loss: 0.6673
+Final Val Loss: 0.6954
+Test F1 (macro): 0.6739
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7718
+Final Val Accuracy: 0.7331
+Final Test Accuracy: 0.7288
+Final Train Loss: 0.5678
+Final Val Loss: 0.6721
+Test F1 (macro): 0.7102
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7126
+Final Val Accuracy: 0.6486
+Final Test Accuracy: 0.6486
+Final Train Loss: 0.7405
+Final Val Loss: 1.0093
+Test F1 (macro): 0.5432
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.6753
+Final Val Accuracy: 0.6216
+Final Test Accuracy: 0.6486
+Final Train Loss: 0.8336
+Final Val Loss: 0.8643
+Test F1 (macro): 0.5411
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7419
+Final Val Accuracy: 0.7207
+Final Test Accuracy: 0.699
+Final Train Loss: 0.6307
+Final Val Loss: 0.7041
+Test F1 (macro): 0.6787
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7475
+Final Val Accuracy: 0.7249
+Final Test Accuracy: 0.7008
+Final Train Loss: 0.6262
+Final Val Loss: 0.7149
+Test F1 (macro): 0.6593
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7312
+Final Val Accuracy: 0.7032
+Final Test Accuracy: 0.6921
+Final Train Loss: 0.6673
+Final Val Loss: 0.6954
+Test F1 (macro): 0.6739
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7718
+Final Val Accuracy: 0.7331
+Final Test Accuracy: 0.7288
+Final Train Loss: 0.5678
+Final Val Loss: 0.6721
+Test F1 (macro): 0.7102
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7419
+Final Val Accuracy: 0.7207
+Final Test Accuracy: 0.699
+Final Train Loss: 0.6307
+Final Val Loss: 0.7041
+Test F1 (macro): 0.6787
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7475
+Final Val Accuracy: 0.7249
+Final Test Accuracy: 0.7008
+Final Train Loss: 0.6262
+Final Val Loss: 0.7149
+Test F1 (macro): 0.6593
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7312
+Final Val Accuracy: 0.7032
+Final Test Accuracy: 0.6921
+Final Train Loss: 0.6673
+Final Val Loss: 0.6954
+Test F1 (macro): 0.6739
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7718
+Final Val Accuracy: 0.7331
+Final Test Accuracy: 0.7288
+Final Train Loss: 0.5678
+Final Val Loss: 0.6721
+Test F1 (macro): 0.7102
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7419
+Final Val Accuracy: 0.7207
+Final Test Accuracy: 0.699
+Final Train Loss: 0.6307
+Final Val Loss: 0.7041
+Test F1 (macro): 0.6787
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7475
+Final Val Accuracy: 0.7249
+Final Test Accuracy: 0.7008
+Final Train Loss: 0.6262
+Final Val Loss: 0.7149
+Test F1 (macro): 0.6593
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7312
+Final Val Accuracy: 0.7032
+Final Test Accuracy: 0.6921
+Final Train Loss: 0.6673
+Final Val Loss: 0.6954
+Test F1 (macro): 0.6739
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7718
+Final Val Accuracy: 0.7331
+Final Test Accuracy: 0.7288
+Final Train Loss: 0.5678
+Final Val Loss: 0.6721
+Test F1 (macro): 0.7102
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7419
+Final Val Accuracy: 0.7207
+Final Test Accuracy: 0.699
+Final Train Loss: 0.6307
+Final Val Loss: 0.7041
+Test F1 (macro): 0.6787
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7419
+Final Val Accuracy: 0.7207
+Final Test Accuracy: 0.699
+Final Train Loss: 0.6307
+Final Val Loss: 0.7041
+Test F1 (macro): 0.6787
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7475
+Final Val Accuracy: 0.7249
+Final Test Accuracy: 0.7008
+Final Train Loss: 0.6262
+Final Val Loss: 0.7149
+Test F1 (macro): 0.6593
+
+=== New Model Run ===
+Model: EEG_Model
+Epochs: 60
+Batch Size: 32
+Learning Rate: 0.0001
+Final Train Accuracy: 0.7429
+Final Val Accuracy: 0.6996
+Final Test Accuracy: 0.6969
+Final Train Loss: 0.6336
+Final Val Loss: 0.7247
+Test F1 (macro): 0.6887
+
