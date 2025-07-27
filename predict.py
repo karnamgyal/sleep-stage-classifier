@@ -1,3 +1,17 @@
+"""
+train.py
+
+Main training script for sleep stage classification using EEG data.
+
+- Load and preprocesses EEG and hypnogram data from Sleep-EDF
+- Split data into training, validation, and test sets
+- Create data loaders for each set
+- Trains a CNN-LSTM model to classify sleep stages
+- Evaluates performance on the validation and test sets
+
+Author: Karma Namgyal
+Date: 2025-07-25
+"""
 import torch
 from model.model import EEG_Model
 from model.utils import preprocess_data, create_data_loaders
@@ -28,13 +42,13 @@ else:
 # Create test loader with unseen subjects
 X_tensor = torch.tensor(X_unseen).float()
 y_tensor = torch.tensor(y_unseen).long()
-test_dataset = TensorDataset(X_tensor, y_tensor)
-test_loader = DataLoader(test_dataset, batch_size=64, shuffle=False)
-print("Number of test samples:", len(test_loader.dataset))
+test_dataset1 = TensorDataset(X_tensor, y_tensor)
+test_loader1 = DataLoader(test_dataset1, batch_size=64, shuffle=False)
+print("Number of test samples:", len(test_loader1.dataset))
 
 # Evaluate
 criterion = torch.nn.CrossEntropyLoss()
-error, avg_loss, f1_macro, test_report, conf_mat = evaluate(model, test_loader, criterion, device)
+error, avg_loss, f1_macro, test_report, conf_mat = evaluate(model, test_loader1, criterion, device)
 
 # Show results
 print(f"Test acc: {1-error:.4f}")

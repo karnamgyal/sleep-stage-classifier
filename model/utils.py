@@ -154,7 +154,7 @@ def create_data_loaders(X, y, batch_size=64):
     X_tensor = torch.tensor(X, dtype=torch.float32)
     y_tensor = torch.tensor(y, dtype=torch.long)
     dataset = TensorDataset(X_tensor, y_tensor)
-    generator = torch.Generator().manual_seed(31)
+    generator = torch.Generator().manual_seed(33)
 
     # Define split sizes
     train_size = int(0.7 * len(dataset))   # 70% training

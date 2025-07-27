@@ -4,8 +4,8 @@ data/
 *.npz
 
 data2/
-*X.npy
-*y.npy
+X.npy
+y.npy
 *.edf
 *.npz
 
@@ -19,10 +19,10 @@ venv311/
 
 # Ignore plots
 plots/
-*training_metrics_train_err.csv
-*training_metrics_val_err.csv
-*training_metrics_train_loss.csv
-*training_metrics_val_loss.csv
+training_metrics_train_err.csv
+training_metrics_val_err.csv
+training_metrics_train_loss.csv
+training_metrics_val_loss.csv
 
 # Ignore model checkpoints
 mlruns/
@@ -31,7 +31,7 @@ mlruns/
 .ipynb_checkpoints/
 
 # Ignore logs
-*results_log.txt
+results_log.txt
 
 # Ignore jupyter notebook files
-*.ipynb
+#*.ipynb

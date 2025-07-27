@@ -10,7 +10,7 @@ Main training script for sleep stage classification using EEG data.
 - Evaluates performance on the validation and test sets
 
 Author: Karma Namgyal
-Date: 2006-09-27
+Date: 2025-07-04
 """
 import os
 import torch 
