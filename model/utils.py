@@ -75,7 +75,7 @@ def preprocess_data(data_dir, epoch_duration=30, sfreq=100):
             raw.set_annotations(annotations)
 
             # Select specific EEG channels and apply bandpass filter
-            raw.pick_channels(['EEG Fpz-Cz', 'EEG Pz-Oz'])
+            raw.pick_channels(['EEG Fpz-Cz', 'EEG Pz-Oz', 'EOG horizontal', 'EMG submental'])
             raw.filter(0.5, 30)  # 0.5-30 Hz bandpass filter
 
             # Extract events from annotations
@@ -154,7 +154,7 @@ def create_data_loaders(X, y, batch_size=64):
     X_tensor = torch.tensor(X, dtype=torch.float32)
     y_tensor = torch.tensor(y, dtype=torch.long)
     dataset = TensorDataset(X_tensor, y_tensor)
-    generator = torch.Generator().manual_seed(33)
+    generator = torch.Generator().manual_seed(41)
 
     # Define split sizes
     train_size = int(0.7 * len(dataset))   # 70% training
