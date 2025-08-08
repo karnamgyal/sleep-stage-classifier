@@ -137,6 +137,49 @@ def preprocess_data(data_dir, epoch_duration=30, sfreq=100):
 
     return X, y
 
+def preprocess_file(file_path, epoch_duration=30, sfreq=100):
+    """
+    Preprocess a single .edf file for inference.
+    
+    Args:
+        file_path (str): Path to the PSG .edf file
+        epoch_duration (int): Duration of each epoch in seconds
+        sfreq (int): Target sampling frequency (Hz)
+    
+    Returns:
+        torch.Tensor: EEG tensor of shape [num_epochs, channels, time]
+    """
+    try:
+        raw = mne.io.read_raw_edf(file_path, preload=True)
+        raw.pick_channels(['EEG Fpz-Cz', 'EEG Pz-Oz', 'EOG horizontal', 'EMG submental'])
+        raw.filter(0.5, 30)
+        raw.resample(sfreq)
+
+        data = raw.get_data()  # shape [C, T]
+        num_channels, total_samples = data.shape
+
+        epoch_len = epoch_duration * sfreq
+        total_epochs = total_samples // epoch_len
+
+        segments = []
+        for i in range(total_epochs):
+            start = i * epoch_len
+            end = start + epoch_len
+            epoch = data[:, start:end]
+            if epoch.shape[1] == epoch_len:
+                segments.append(epoch)
+
+        segments = np.array(segments)  # [N, C, T]
+
+        # Normalize each epoch independently
+        segments = (segments - segments.mean(axis=(1, 2), keepdims=True)) / segments.std(axis=(1, 2), keepdims=True)
+
+        return torch.tensor(segments, dtype=torch.float32)
+
+    except Exception as e:
+        print(f"Error preprocessing file {file_path}: {e}")
+        return None
+
 # Function create the data loaders
 def create_data_loaders(X, y, batch_size=64):
     """
@@ -160,19 +203,17 @@ def create_data_loaders(X, y, batch_size=64):
     train_size = int(0.7 * len(dataset))   # 70% training
     val_size = int(0.15 * len(dataset))    # 15% validation
     test_size = int(0.15 * len(dataset))   # 15% testing
-    user_size = len(dataset) - train_size - val_size - test_size  # Remainder
 
     # Split the dataset
     train_dataset, val_dataset, test_dataset, user_dataset = random_split(
-        dataset, [train_size, val_size, test_size, user_size], generator=generator
+        dataset, [train_size, val_size, test_size], generator=generator
     )
     
     # Create DataLoaders
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
-    user_loader = DataLoader(user_dataset, batch_size=batch_size, shuffle=False)
 
     print(f"Data split - Train: {len(train_dataset)}, Val: {len(val_dataset)}, Test: {len(test_dataset)}")
 
-    return train_loader, val_loader, test_loader, user_loader
+    return train_loader, val_loader, test_loader,

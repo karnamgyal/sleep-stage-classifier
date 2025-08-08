@@ -136,7 +136,7 @@ else:
     np.save("data/y.npy", y)
 
 # Create DataLoaders
-train_loader, val_loader, test_loader, user_loader = create_data_loaders(X, y)
+train_loader, val_loader, test_loader = create_data_loaders(X, y)
 
 # Initialize model
 model = EEG_Model()
