@@ -20,10 +20,10 @@ import torch.nn.functional as F
 class EEG_Model(nn.Module):
     def __init__(self):
         super(EEG_Model, self).__init__()
-        self.conv1 = nn.Conv1d(4, 32, kernel_size=5, stride=2)
+        self.conv1 = nn.Conv1d(4, 32, kernel_size=7, stride=2)
         self.bn1 = nn.BatchNorm1d(32)
         self.pool1 = nn.MaxPool1d(2)
-        self.conv2 = nn.Conv1d(32, 64, kernel_size=3, stride=1)
+        self.conv2 = nn.Conv1d(32, 64, kernel_size=5, stride=1)
         self.bn2 = nn.BatchNorm1d(64)
         self.pool2 = nn.MaxPool1d(2)
         self.conv3 = nn.Conv1d(64, 128, kernel_size=3, stride=1)

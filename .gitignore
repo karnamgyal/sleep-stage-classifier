@@ -35,3 +35,6 @@ results_log.txt
 
 # Ignore jupyter notebook files
 #*.ipynb
+
+# Ignore 1.pth
+1.pth
