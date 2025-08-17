@@ -11,6 +11,12 @@ __pycache__/
 venv311/
 .env/
 
+# Ignore 
+data2/
+    X.npy
+    y.npy
+    
+# Ignore configuration files
 # Ignore plots
 plots/
 training_metrics_train_err.csv
