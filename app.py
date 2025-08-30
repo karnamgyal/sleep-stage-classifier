@@ -33,7 +33,7 @@ except ImportError:
 
 # Configuration
 DATA_DIR = "./data2"
-MODEL_PATH = "model_weights.pth"
+MODEL_PATH = "model/model_weights.pth"
 STAGE_LABELS = ['Wake', 'N1', 'N2', 'N3', 'REM']
 STAGE_COLORS = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7']
 

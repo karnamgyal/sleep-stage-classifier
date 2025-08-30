@@ -39,4 +39,5 @@ results_log.txt
 # Ignore 1.pth
 1.pth
 
+ #Ignore results log
 results_log.txt

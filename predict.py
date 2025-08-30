@@ -28,7 +28,7 @@ warnings.filterwarnings("ignore")
 mne.set_log_level("ERROR")
 
 DATA_DIR = "./data2"
-MODEL_PATH = "model_weights.pth"
+MODEL_PATH = "model/model_weights.pth"
 STAGE_LABELS = ['W', 'N1', 'N2', 'N3', 'REM']
 
 # Hardcoded patient info (by PSG filename)

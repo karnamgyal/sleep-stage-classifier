@@ -1,4 +1,4 @@
-# EEG Sleep Stage Classifier 
+# Full day-night EEG/EMG/EOG Sleep Stage Classifier 
 
 This project involved building a complete deep learning pipeline from scratch: from raw EEG/EOG/EMG data preprocessing with MNE, to designing and training a CNN-LSTM model, to evaluating test performance and deploying an interactive Streamlit web app for visualization!
 
@@ -22,14 +22,20 @@ This project uses the sleep-cassette file from the Sleep-EDF Expanded dataset fr
 - Stacked LSTMs for capturing temporal dependencies
 - Supports raw and smoothed predictions for comparison and visualization  
 
-## Evaluation
-The model was trained and then tested on a smaller dataset for evaluation. 
-- Test accuracy: 0.7288
-- Test loss: 0.6814 
+# Baseline 
+- Built a 1D-CNN with simpler architecture to test ability to capture local patterns, trained on EEG only.
+- Accuracy: 0.6198.
+- Test Loss: 0.9669.
+- Test Macro-F1: 0.6073.
 
-The model was also tested on the unseen subjects four that were taken out for the visualization on the web app.
-- Test accuracy: 0.7610
-- Test loss: 0.5872
+## Evaluation
+The primary CNN-LSTM model was trained and after rigorous hyperparameter tuning and architecture changes, we obtained: 
+- Test Accuracy: 0.7357.
+- Test Macro-F1: 0.7341.
+- Test Loss: 0.6520.
+
+## Deployment 
+I have deploye the model on Streamlit for interactive visualization: [Streamlit Demo](https://sleep-stage-classifier.streamlit.app/)
 
 ## Reflection 
 This was also a highly valuable hands-on experience with the entire machine learning pipeline, preparing me to take on more challenging projects. While the model does not perform as accurately as those in research papers, it still performs well and provides valuable insight into how sleep stages evolve throughout the day-night cycle.
