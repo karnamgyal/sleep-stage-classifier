@@ -22,7 +22,7 @@ This project uses the sleep-cassette file from the Sleep-EDF Expanded dataset fr
 - Stacked LSTMs for capturing temporal dependencies
 - Supports raw and smoothed predictions for comparison and visualization  
 
-# Baseline 
+## Baseline 
 - Built a 1D-CNN with simpler architecture to test ability to capture local patterns, trained on EEG only.
 - Accuracy: 0.6198.
 - Test Loss: 0.9669.
@@ -42,5 +42,6 @@ This was also a highly valuable hands-on experience with the entire machine lear
 
 ## Full Project Report
 This contains a full deep dive explaining each part of the project's deep learning pipeline: [Detailed Write-up on Notion](https://tropical-address-50b.notion.site/Sleep-Stage-Classification-from-Full-Night-EEG-EOG-EMG-Recording-Using-CNN-LSTM-213209af64a9803a8ca0ccb6b78e73c1)  
+
 
 
