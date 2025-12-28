@@ -35,13 +35,14 @@ The primary CNN-LSTM model was trained and after rigorous hyperparameter tuning 
 - Test Loss: 0.6520.
 
 ## Deployment 
-I have deploye the model on Streamlit for interactive visualization: [Streamlit Demo](https://sleep-stage-classifier.streamlit.app/)
+I have deployed the model on Streamlit for interactive visualization: [Streamlit Demo](https://sleep-stage-classifier.streamlit.app/)
 
 ## Reflection 
 This was also a highly valuable hands-on experience with the entire machine learning pipeline, preparing me to take on more challenging projects. While the model does not perform as accurately as those in research papers, it still performs well and provides valuable insight into how sleep stages evolve throughout the day-night cycle.
 
 ## Full Project Report
-This contains a full deep dive explaining each part of the project's deep learning pipeline: [Detailed Write-up on Notion](https://tropical-address-50b.notion.site/Sleep-Stage-Classification-from-Full-Night-EEG-EOG-EMG-Recording-Using-CNN-LSTM-213209af64a9803a8ca0ccb6b78e73c1)  
+This contains a full deep dive explaining each part of the project's deep learning pipeline: [Detailed Write-up on Notion](https://tropical-address-50b.notion.site/Karma-D-Namgyal-1cc209af64a9800f8660f4bbf5c5ce53?p=24d209af64a980bba7afccb8298b46ed&pm=c)  
+
 
 
 
