@@ -16,8 +16,6 @@ Date edited: 2025-06-24
 import os
 import mne
 import numpy as np
-import mne
-import warnings
 from torch.utils.data import TensorDataset, DataLoader, random_split
 import torch
 
@@ -137,7 +135,7 @@ def preprocess_data(data_dir, epoch_duration=30, sfreq=100):
 
     return X, y
 
-def preprocess_file(file_path, epoch_duration=30, sfreq=100):
+def preprocess_file(file_path, epoch_duration=30):
     """
     Preprocess a single .edf file for inference.
     
